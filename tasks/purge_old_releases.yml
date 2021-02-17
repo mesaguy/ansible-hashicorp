@@ -1,0 +1,22 @@
+---
+- name: Find directories in {{ hashicorp_software_dir }}
+  become: true
+  ansible.builtin.find:
+    paths: '{{ hashicorp_software_dir }}'
+    file_type: directory
+    exclude:
+      - active
+      - '{{ hashicorp_software_version }}'
+    recurse: false
+  register: hashicorp_purge_release_directories
+
+- name: Purge {{ hashicorp_software_dir }} old releases
+  become: true
+  ansible.builtin.file:
+    path: '{{ hashicorp_purge_release_directory.path }}'
+    state: absent
+  loop_control:
+    loop_var: hashicorp_purge_release_directory
+  with_items: '{{ hashicorp_purge_release_directories.files }}'
+  when:
+    - hashicorp_purge_release_directories.files | default([]) | length > 0

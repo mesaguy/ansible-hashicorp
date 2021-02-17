@@ -1,0 +1,34 @@
+#!/bin/bash
+
+function get_latest() {
+    NAME=$1
+    lynx -dump -nolist https://releases.hashicorp.com/$NAME/ | grep ${NAME}_ | awk '{print $2}' | grep -vE '.*(\-alpha.*|\+ent.*|\-ent.*|\-connect.*|\-rc.*|\-beta.*)' | sort --version-sort | tail -1 | sed "s/${NAME}_//g"
+}
+
+
+function get_latest_docker() {
+    NAME=$1
+    curl -s "https://registry.hub.docker.com/v2/repositories/library/${NAME}/tags/" | jq -r '."results"[]["name"]' | grep -v '^latest$' | grep -vE '.*(\-alpha.*|\+ent.*|\-ent.*|\-connect.*|\-rc.*|\-beta.*)' | head -1
+}
+
+cat > vars/versions.yml << EOF
+---
+boundary: $(get_latest boundary)
+consul: $(get_latest consul)
+envconsul: $(get_latest envconsul)
+nomad: $(get_latest nomad)
+packer: $(get_latest packer)
+sentinel: $(get_latest sentinel)
+serf: $(get_latest serf)
+terraform: $(get_latest terraform)
+vagrant: $(get_latest vagrant)
+vault: $(get_latest vault)
+vault_ssh_helper: $(get_latest vault-ssh-helper False)
+waypoint: $(get_latest waypoint)
+EOF
+
+cat > vars/docker_versions.yml << EOF
+---
+consul: $(get_latest_docker consul)
+vault: $(get_latest_docker vault)
+EOF

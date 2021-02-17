@@ -1,0 +1,95 @@
+---
+galaxy_info:
+  role_name: hashicorp
+  company: mesaguy
+  author: mesaguy
+  description: securely install the latest hashicorp software
+
+  license: MIT
+
+  min_ansible_version: 2.9
+
+  # If this a Container Enabled role, provide the minimum Ansible Container version.
+  # min_ansible_container_version:
+
+  #
+  # Provide a list of supported platforms, and for each platform a list of versions.
+  # If you don't wish to enumerate all versions for a particular platform, use 'all'.
+  # To view available platforms and versions (or releases), visit:
+  # https://galaxy.ansible.com/api/v1/platforms/
+  #
+  # platforms:
+  # - name: Fedora
+  #   versions:
+  #   - all
+  #   - 25
+  # - name: SomePlatform
+  #   versions:
+  #   - all
+  #   - 1.0
+  #   - 7
+  #   - 99.99
+  platforms:
+    - name: Alpine
+      versions:
+        - all
+    - name: Amazon
+      versions:
+        - all
+    - name: ArchLinux
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - stretch
+        - buster
+    - name: EL
+      versions:
+        - 6
+        - 7
+        - 8
+    - name: Fedora
+      versions:
+        - 20
+        - 21
+        - 22
+        - 23
+        - 24
+        - 25
+        - 26
+        - 27
+        - 28
+        - 29
+        - 30
+        - 31
+        - 32
+    - name: opensuse
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - xenial
+        - artful
+        - bionic
+        - cuttlefish
+        - eoan
+        - focal
+
+  galaxy_tags:
+    # Maximum of 20:
+    - hashicorp
+    - boundary
+    - consul
+    - envconsul
+    - nomad
+    - packer
+    - sentinel
+    - serf
+    - terraform
+    - vagrant
+    - vault
+    - waypoint
+
+# List your role dependencies here, one per line. Be sure to remove the '[]' above,
+# if you add dependencies to this list.
+dependencies: []

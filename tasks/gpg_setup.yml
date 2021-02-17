@@ -1,0 +1,19 @@
+---
+- name: Verify that "gpg" command is in PATH
+  command: gpg --version
+  changed_when: false
+
+- name: Check if HashiCorp is present in GPG key store
+  become: true
+  command: gpg --list-keys
+  changed_when: false
+  register: gpg_output
+
+- name: Import HashiCorp's GPG public key
+  become: true
+  shell:
+    cmd: |
+       cat << EOF | gpg --import
+       {{ lookup("file", "files/hashicorp.asc") }}
+       EOF
+  when: not 'HashiCorp Security <security@hashicorp.com>' in gpg_output.stdout

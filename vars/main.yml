@@ -1,0 +1,16 @@
+---
+# vars file for mesaguy.hashicorp
+hashicorp_software_names:
+ - boundary
+ - consul
+ - envconsul
+ - nomad
+ - packer
+ - sentinel
+ - serf
+ - terraform
+ - vagrant
+ - vault
+ - vault-ssh-helper
+ - waypoint
+hashicorp_docker_software_names:

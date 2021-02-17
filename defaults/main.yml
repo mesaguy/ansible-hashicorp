@@ -1,0 +1,20 @@
+---
+# defaults file for mesaguy.hashicorp
+
+hashicorp_software_link_dir: /usr/local/bin
+hashicorp_check_gpg_signatures: false
+hashicorp_base_dir: /opt/hashicorp
+
+hashicorp_user: root
+hashicorp_group: root
+
+# Purge all except the latest release, applies to ZIP based installs only
+hashicorp_purge_old_releases: false
+
+###############################################################################
+# Mirrors
+###############################################################################
+# These are seperated in case one wants to use a local mirror for just
+# binaries or GPG keys
+hashicorp_mirror: '{{ lookup("env", "HASHICORP_MIRROR") | default("https://releases.hashicorp.com", True) }}'
+hashicorp_gpg_mirror: '{{ lookup("env", "HASHICORP_GPG_MIRROR") | default("https://releases.hashicorp.com", True) }}'

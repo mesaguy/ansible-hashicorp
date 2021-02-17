@@ -1,0 +1,27 @@
+---
+- name: converge
+  hosts: all
+  vars:
+    # Install all HashiCorp software
+    hashicorp_install_boundary: true
+    hashicorp_install_consul: true
+    hashicorp_install_envconsul: true
+    hashicorp_install_nomad: true
+    hashicorp_install_packer: true
+    hashicorp_install_sentinel: true
+    hashicorp_install_serf: true
+    hashicorp_install_terraform: true
+    hashicorp_install_vagrant: true
+    hashicorp_install_vault: true
+    hashicorp_install_vault_ssh_helper: true
+    hashicorp_install_waypoint: true
+
+    hashicorp_check_gpg_signatures: true
+
+    # Purge all except the latest release
+    hashicorp_purge_old_releases: true
+  tasks:
+
+    - name: Include mesaguy.hashicorp role
+      ansible.builtin.include_role:
+        name: mesaguy.hashicorp

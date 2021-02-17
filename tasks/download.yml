@@ -1,0 +1,98 @@
+---
+- name: Download {{ hashicorp_software_description }} archive SHA256SUM file ({{ hashicorp_archive_sha256_url }})
+  become: true
+  ansible.builtin.get_url:
+    url: '{{ hashicorp_archive_sha256_url }}'
+    dest: '{{ hashicorp_install_dir }}'
+    mode: 0600
+    owner: root
+    group: root
+  register: hashicorp_download
+  retries: 5
+  delay: 10
+  until: hashicorp_download is succeeded
+
+- block:
+    - name: Download {{ hashicorp_software_description }} archive SHA256SUM GPG signature file ({{ hashicorp_archive_sha256_url }}.sig)
+      become: true
+      ansible.builtin.get_url:
+        url: '{{ hashicorp_archive_sha256_url }}.sig'
+        dest: '{{ hashicorp_install_dir }}'
+        mode: 0600
+        owner: root
+        group: root
+      register: hashicorp_download
+      retries: 5
+      delay: 10
+      until: hashicorp_download is succeeded
+
+    - name: Verify {{ hashicorp_software_description }} GPG signature of the SHA256SUMS file
+      become: true
+      changed_when: false
+      ansible.builtin.command: 'gpg --verify {{ hashicorp_archive_sha256_url | basename }}.sig {{ hashicorp_archive_sha256_url | basename }}'
+      args:
+        chdir: '{{ hashicorp_install_dir }}'
+
+    - name: Get {{ hashicorp_software_description }} SHA256SUM file contents
+      become: true
+      changed_when: false
+      ansible.builtin.command: 'cat {{ hashicorp_archive_sha256_url | basename }}'
+      args:
+        chdir: '{{ hashicorp_install_dir }}'
+      register: hashicorp_software_sha256_sums
+
+    - name: Filter SHA256SUMs to set {{ hashicorp_software_description }} SHA256SUM sum fact
+      set_fact:
+        hashicorp_software_sha256sum: '{{ hashicorp_software_sha256.split() | first }}'
+      loop_control:
+        loop_var: hashicorp_software_sha256
+      with_items: '{{ hashicorp_software_sha256_sums.stdout_lines }}'
+      when:
+        - hashicorp_archive_url | basename in hashicorp_software_sha256
+
+    - name: Ensure {{ hashicorp_software_description }} SHA256SUM sum is defined correctly
+      assert:
+        that:
+          - hashicorp_software_sha256sum | length == 64
+          # Ensure we aren't using a previously defined variable
+          - hashicorp_software_sha256sum in hashicorp_software_sha256_sums.stdout
+  when:
+    - hashicorp_check_gpg_signatures
+
+- name: Download {{ hashicorp_software_description }} archive ({{ hashicorp_archive_url }})
+  become: true
+  ansible.builtin.get_url:
+    url: '{{ hashicorp_archive_url }}'
+    dest: '{{ hashicorp_install_dir }}'
+    mode: 0600
+    owner: root
+    group: root
+    checksum: 'sha256:{{ hashicorp_software_sha256sum | default(hashicorp_archive_sha256_url, true) }}'
+  register: hashicorp_download
+  retries: 5
+  delay: 10
+  until: hashicorp_download is succeeded
+
+- name: Extract {{ hashicorp_software_description }} binary archive
+  become: true
+  unarchive:
+    src: '{{ hashicorp_install_dir }}/{{ hashicorp_archive_filename }}'
+    dest: '{{ hashicorp_install_dir }}'
+    remote_src: true
+
+- name: Set {{ hashicorp_software_description }} binary permissions
+  become: true
+  ansible.builtin.file:
+    path: '{{ hashicorp_binary }}'
+    owner: '{{ hashicorp_user }}'
+    group: '{{ hashicorp_group }}'
+    mode: 0755
+
+- name: Symlink {{ hashicorp_binary }} to {{ hashicorp_binary_symlink }}
+  become: true
+  ansible.builtin.file:
+    src: '{{ hashicorp_binary }}'
+    dest: '{{ hashicorp_binary_symlink }}'
+    owner: root
+    group: root
+    state: link

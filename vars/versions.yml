@@ -1,0 +1,13 @@
+---
+boundary: 0.1.6
+consul: 1.9.3
+envconsul: 0.11.0
+nomad: 1.0.3
+packer: 1.6.6
+sentinel: 0.17.4
+serf: 0.8.2
+terraform: 0.14.6
+vagrant: 2.2.14
+vault_ssh_helper: 0.2.1
+vault: 1.6.2
+waypoint: 0.2.1

@@ -1,0 +1,14 @@
+---
+extends: default
+
+rules:
+  # Match Ansible Galaxy's expectations
+  line-length:
+    max: 160
+    level: warning
+
+ignore: |
+  .travis.yml
+  .kitchen/
+  venv/
+  vars/

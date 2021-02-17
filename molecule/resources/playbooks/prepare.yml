@@ -1,0 +1,49 @@
+---
+- name: prepare
+  hosts: all
+  tasks:
+    - name: Create directories for an old version of consul to be purged by role
+      become: true
+      ansible.builtin.file:
+        name: '{{ hashicorp_test_dir }}'
+        state: directory
+        owner: mail
+        group: mail
+        mode: 0777
+      loop_control:
+        loop_var: hashicorp_test_dir
+      with_items:
+        - '/opt/hashicorp'
+        - '/opt/hashicorp/consul'
+        - '/opt/hashicorp/consul/0.0.0'
+
+    - name: Create fake old version of consul to be purged by role
+      become: true
+      ansible.builtin.copy:
+        src: /bin/sh
+        dest: '/opt/hashicorp/consul/0.0.0/consul'
+        remote_src: true
+        owner: mail
+        group: mail
+        mode: 0777
+
+    - block:
+        - name: Update apt metadata
+          become: true
+          ansible.builtin.apt:
+            update_cache: true
+            cache_valid_time: 7200
+
+        - name: Install "gpg" for testing Debian and Ubuntu
+          become: true
+          ansible.builtin.package:
+            name: gnupg
+      when: ansible_os_family == 'Debian'
+
+    - name: Install "ls" and other commands needed for testing Alpine
+      become: true
+      ansible.builtin.package:
+        name:
+          - coreutils
+          - gnupg
+      when: ansible_os_family == 'Alpine'

@@ -1,0 +1,67 @@
+---
+- name: Set {{ hashicorp_software_name | title }} {{ hashicorp_software_version }} facts
+  ansible.builtin.set_fact:
+    hashicorp_binary: '{{ hashicorp_base_dir }}/{{ hashicorp_software_name }}/{{ hashicorp_software_version }}/{{ hashicorp_software_name }}'
+    hashicorp_binary_symlink: '{{ hashicorp_software_link_dir }}/{{ hashicorp_software_name }}'
+    hashicorp_archive_filename: '{{ hashicorp_archive_url | basename }}'
+    hashicorp_install_dir: '{{ hashicorp_base_dir }}/{{ hashicorp_software_name }}/{{ hashicorp_software_version }}'
+    hashicorp_software_dir: '{{ hashicorp_base_dir }}/{{ hashicorp_software_name }}'
+    hashicorp_software_description: '{{ hashicorp_software_name | title }} {{ hashicorp_software_version }}'
+
+- name: Create {{ hashicorp_software_description }} installation directories
+  become: true
+  ansible.builtin.file:
+    state: directory
+    path: '{{ hashicorp_directory }}'
+    owner: '{{ hashicorp_user }}'
+    group: '{{ hashicorp_group }}'
+    mode: 0755
+  loop_control:
+    loop_var: hashicorp_directory
+  with_items:
+    - '{{ hashicorp_base_dir }}'
+    - '{{ hashicorp_software_dir }}'
+    - '{{ hashicorp_install_dir }}'
+
+- name: Check if {{ hashicorp_software_description }} is installed
+  become: true
+  ansible.builtin.stat:
+    path: '{{ hashicorp_binary }}'
+  register: hashicorp_binary_installed
+
+- name: Get {{ hashicorp_binary_symlink }} file stats
+  ansible.builtin.stat:
+    path: '{{ hashicorp_binary_symlink }}'
+  register: hashicorp_binary_symlink_present
+  when:
+    - hashicorp_binary_installed.stat.exists
+
+- name: Include task download {{ hashicorp_software_description }}
+  include_tasks: download.yml
+  when:
+    - not hashicorp_binary_installed.stat.exists
+
+- name: Symlink {{ hashicorp_install_dir }} to {{ hashicorp_base_dir }}/{{ hashicorp_software_name }}/active
+  become: true
+  ansible.builtin.file:
+    src: '{{ hashicorp_install_dir }}'
+    dest: '{{ hashicorp_software_dir }}/active'
+    owner: root
+    group: root
+    state: link
+
+- name: Remove {{ hashicorp_software_description }} temporary files
+  become: true
+  ansible.builtin.file:
+    path: '{{ hashicorp_tmp_file }}'
+    state: absent
+  loop_control:
+    loop_var: hashicorp_tmp_file
+  with_items:
+    - '{{ hashicorp_install_dir }}/{{ hashicorp_archive_filename }}'
+    - '{{ hashicorp_install_dir }}/{{ hashicorp_archive_sha256_url | basename }}'
+    - '{{ hashicorp_install_dir }}/{{ hashicorp_archive_sha256_url | basename }}.sig'
+
+- name: Include task to purge old releases
+  include_tasks: purge_old_releases.yml
+  when: hashicorp_purge_old_releases

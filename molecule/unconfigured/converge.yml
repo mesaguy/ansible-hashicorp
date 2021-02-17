@@ -1,0 +1,8 @@
+---
+- name: converge
+  hosts: all
+  tasks:
+
+    - name: Include mesaguy.hashicorp role
+      ansible.builtin.include_role:
+        name: mesaguy.hashicorp

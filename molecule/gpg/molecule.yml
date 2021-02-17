@@ -1,0 +1,21 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: ${MOLECULE_DISTRO:-archlinux}
+    image: mesaguy/ansible-molecule-${MOLECULE_DISTRO:-archlinux}:${MOLECULE_TAG:-latest}
+lint: |
+  set -e
+  yamllint --config-file=tests/yamllint.yml .
+  ansible-lint
+verifier:
+  name: testinfra
+  directory: ../resources/tests/
+provisioner:
+  name: ansible
+  playbooks:
+    create: ../resources/playbooks/create.yml
+    destroy: ../resources/playbooks/destroy.yml
+    prepare: ../resources/playbooks/prepare.yml
