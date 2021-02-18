@@ -1,6 +1,19 @@
 # Ansible HashiCorp
 
-Installs and updates [HashiCorp](https://www.hashicorp.com) software.
+Installs and updates the following [HashiCorp](https://www.hashicorp.com) software:
+
+- Boundary
+- Consul
+- EnvConsul
+- Nomad
+- Packer
+- Sentinel
+- Serf
+- Terraform
+- Vagrant
+- Vault
+- Vault SSH Helper
+- Waypoint
 
 This role may eventually manage some [HashiCorp](https://www.hashicorp.com) software, but the current focus is exclusively the installation of [HashiCorp](https://www.hashicorp.com) software in a secure, consistent, and reproducible manner.
 
