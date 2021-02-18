@@ -71,9 +71,26 @@ The following example would install 'Consul' and 'Vault' software:
       roles:
          - { role: mesaguy.hashicorp }
 
-## Updating default software versions
+## Release management
+### Updating default software versions
 
-Default software release versions are controlled by the 'vars/versions.yml' and 'docker_versions.yml' files. These files can be updated manually or by running the ```scripts/update_versions``` script.
+Default software release versions are controlled by the 'vars/versions.yml' and 'docker_versions.yml' files.
+
+These files can be updated manually or by running the ```scripts/update_versions``` script.
+
+### Testing
+Tests are run via molecule.
+
+You will need [pipenv](https://pipenv.pypa.io) installed and [docker](https://www.docker.com) running in order to test.
+
+Initialize the pipenv environment by running the following in the base directory of this repo:
+
+    pipenv install
+
+The following can be used for basic validation. The first tests a normal install and the second scenario ensures GPG validation works:
+
+    MOLECULE_DISTRO=debian MOLECULE_TAG=debian-10 pipenv run molecule test
+    MOLECULE_DISTRO=debian MOLECULE_TAG=debian-10 pipenv run molecule test -s gpg
 
 ## License
 
