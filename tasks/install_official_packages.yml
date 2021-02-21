@@ -1,0 +1,33 @@
+---
+- name: No official package available
+  fail:
+    msg: '{{ hashicorp_software_name }} is not available as an official package and must be installed as ZIP'
+  when:
+    - hashicorp_software_name not in hashicorp_official_package_names
+
+- block:
+    - name: Add HashiCorp Apt repo GPG public key
+      become: true
+      ansible.builtin.apt_key:
+        data: "{{ lookup('file', 'files/hashicorp-apt.asc') }}"
+        state: present
+
+    - debug:
+        msg: 'deb [arch={{ hashicorp_arch }}] {{ hashicorp_apt_mirror }} {{ ansible_distribution_release }} main'
+
+    - name: Setup HashiCorp Apt repository
+      become: true
+      ansible.builtin.apt_repository:
+        repo: 'deb [arch={{ hashicorp_arch }}] {{ hashicorp_apt_mirror }} {{ ansible_distribution_release }} main'
+        state: present
+        filename: hashicorp
+      register: hashicorp_apt_repo_setup
+  when:
+    - ansible_os_family == 'Debian'
+    - hashicorp_apt_repo_setup is undefined
+
+- name: Install {{ hashicorp_software_name }}
+  become: true
+  ansible.builtin.package:
+    name: '{{ hashicorp_software_name }}'
+    state: '{{ hashicorp_software_state }}'

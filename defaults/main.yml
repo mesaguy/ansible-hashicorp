@@ -11,6 +11,18 @@ hashicorp_group: root
 # Purge all except the latest release, applies to ZIP based installs only
 hashicorp_purge_old_releases: false
 
+# Where available, use distro packages
+hashicorp_use_distro_packages: false
+
+# Where available, use official packages
+hashicorp_use_official_packages: false
+
+# Purge zip installed releases
+hashicorp_purge_zip_releases: false
+
+# State to keep distro and official packages in (Generally 'present' or 'latest'):
+hashicorp_software_state: present
+
 ###############################################################################
 # Mirrors
 ###############################################################################
@@ -18,3 +30,4 @@ hashicorp_purge_old_releases: false
 # binaries or GPG keys
 hashicorp_mirror: '{{ lookup("env", "HASHICORP_MIRROR") | default("https://releases.hashicorp.com", True) }}'
 hashicorp_gpg_mirror: '{{ lookup("env", "HASHICORP_GPG_MIRROR") | default("https://releases.hashicorp.com", True) }}'
+hashicorp_apt_mirror: '{{ lookup("env", "HASHICORP_APT_MIRROR") | default("https://apt.releases.hashicorp.com", True) }}'

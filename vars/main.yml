@@ -13,4 +13,14 @@ hashicorp_software_names:
  - vault
  - vault-ssh-helper
  - waypoint
+hashicorp_official_package_names:
+ - boundary
+ - consul
+ - nomad
+ - packer
+ - serf
+ - terraform
+ - vagrant
+ - vault
+ - waypoint
 hashicorp_docker_software_names:

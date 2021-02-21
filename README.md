@@ -24,6 +24,8 @@ This role may eventually manage some [HashiCorp](https://www.hashicorp.com) soft
 
 ## Role Variables
 
+### Generic
+
 By default, this role installs no software. Each piece of software must be specifically enabled.
 
 The following variables can be defined to install specific HashiCorp software:
@@ -41,7 +43,11 @@ The following variables can be defined to install specific HashiCorp software:
     hashicorp_install_vault_ssh_helper: true
     hashicorp_install_waypoint: true
 
-By default, software is installed to this base directory. For instance, the consul version 1.0.0 binary would be installed to /opt/hashicorp/consul/1.0.0/consul
+### HashiCorp ZIP file installs
+
+By default, this role installs HashiCorp's ZIP files containing pre-compiled binaries using the variables below
+
+Software is installed to this base directory. For instance, the consul version 1.0.0 binary would be installed to /opt/hashicorp/consul/1.0.0/consul
 
     hashicorp_base_dir: /opt/hashicorp
 
@@ -49,14 +55,13 @@ Symlinks to each binary are created here:
 
     hashicorp_software_link_dir: /usr/local/bin
 
-Validate the GPG signatures on all binaries (default: false). This requires the "gpg" command to be available. If the HashiCorp GPG release public key is missing, this role will automatically add the GPG public key to the "root" users GPG keyring:
+Validate the GPG signatures on all release ZIP files (default: false). This requires the "gpg" command to be available. If the HashiCorp GPG release public key is missing, this role will automatically add the GPG public key to the "root" users GPG keyring:
 
    hashicorp_check_gpg_signatures: true
 
 Purge all except the latest software release (default: false):
 
     hashicorp_purge_old_releases: true
-
 
 Change the user who owns the software, defaults to the options below:
 
@@ -67,6 +72,53 @@ If a local mirror of the HashiCorp software is available, you can "HASHICORP_MIR
 
    hashicorp_mirror: https://example.org/hashicorp
    hashicorp_gpg_mirror: https://example.org/hashicorp
+
+### Use HashiCorp packages instead of ZIP files
+
+When enabled, use HashiCorp's official RPM/DEB packages instead of HashiCorp's official ZIP files, defaults to false:
+
+    hashicorp_use_official_packages: true
+
+This option applies to the following distro releases and architectures:
+
+| Distro      | Release        | Architectures |
+|-------------|----------------|---------------|
+| AmazonLinux | 2              | amd64/x86_64  |
+| Debian      | Jessie (8)     | amd64/x86_64  |
+| Debian      | Stretch (9)    | amd64/x86_64  |
+| Debian      | Buster (10)    | amd64/x86_64  |
+| Fedora      | 29             | amd64/x86_64  |
+| Fedora      | 30             | amd64/x86_64  |
+| Fedora      | 31             | amd64/x86_64  |
+| Fedora      | 32             | amd64/x86_64  |
+| Fedora      | 33             | amd64/x86_64  |
+| RHEL        | 7              | amd64/x86_64  |
+| RHEL        | 8              | amd64/x86_64  |
+| Ubuntu      | Bionic (18.04) | amd64/x86_64  |
+| Ubuntu      hashicorp_use_official_packages:| Eoam (19.10)   | amd64/x86_64  |
+| Ubuntu      | Focal (20.04)  | amd64/x86_64  |
+| Ubuntu      | Groovy (20.10) | amd64/x86_64  |
+| Ubuntu      | Xenial (16.04) | amd64/x86_64  |
+
+Purge HashiCorp software installed via ZIP files, defaults to false:
+
+    hashicorp_purge_zip_releases: true
+
+State to keep HashiCorp software in, defaults to "present":
+
+    hashicorp_software_state: latest
+
+### Use Distro packages instead of ZIP files
+
+When enabled, use the distro's (potentially unofficial) packages instead of HashiCorp's official ZIP files, defaults to false:
+
+    hashicorp_use_distro_packages: true
+
+Currently, this option applies to ArchLinux only
+
+Purge HashiCorp software installed via ZIP files, defaults to false:
+
+    hashicorp_purge_zip_releases: true
 
 ## Dependencies
 

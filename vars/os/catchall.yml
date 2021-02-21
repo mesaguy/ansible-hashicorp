@@ -1,0 +1,4 @@
+---
+# Catchall
+hashicorp_distro_packages_supported: false
+hashicorp_official_packages_supported: false

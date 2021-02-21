@@ -11,38 +11,67 @@
     - 'distribution/{{ ansible_distribution }}.yml'
     - 'os/{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml'
     - 'os/{{ ansible_os_family }}.yml'
-    - 'all.yml'
+    - 'os/catchall.yml'
 
 - name: Determine architecture
   set_fact:
     hashicorp_arch: '{{ ansible_userspace_architecture | replace("x86_64", "amd64") }}'
-
-- name: Install unzip
-  become: true
-  package:
-    name: '{{ hashicorp_unzip_package | default("unzip") }}'
 
 - name: Include variable file containing current HashiCorp variables
   include_vars:
     file: versions.yml
     name: hashicorp_versions
 
-- name: Import task to ensure HashiCorp GPG public key is present in GPG store
-  include_tasks: gpg_setup.yml
-  when: hashicorp_check_gpg_signatures
-
-- name: Include tasks to install HashiCorp software
-  include_tasks: install_zip.yml
-  vars:
-    hashicorp_archive_url: "{{ hashicorp_mirror }}/{{ hashicorp_software_name }}/{{ hashicorp_software_version }}/\
-      {{ hashicorp_software_name }}_{{ hashicorp_software_version }}_{{ ansible_system | lower }}_{{ hashicorp_arch }}.zip"
-    hashicorp_archive_sha256_url: "{{ hashicorp_gpg_mirror }}/{{ hashicorp_software_name }}/{{ hashicorp_software_version }}\
-      /{{ hashicorp_software_name }}_{{ hashicorp_software_version }}_SHA256SUMS"
-    hashicorp_software_version: |-
-      {{ lookup('vars', 'hashicorp_' + hashicorp_software_name | replace ('-', '_') + '_version',
-         default=hashicorp_versions[hashicorp_software_name | replace ('-', '_')]) }}
+- name: Include task to install HashiCorp software via official packages
+  include_tasks: install_official_packages.yml
   loop_control:
     loop_var: hashicorp_software_name
   with_items: '{{ hashicorp_software_names }}'
   when:
     - lookup('vars', 'hashicorp_install_' + hashicorp_software_name | replace ('-', '_'), default=false)
+    - hashicorp_use_official_packages
+    - hashicorp_official_packages_supported
+
+- name: Include task to install HashiCorp software via distro packages
+  include_tasks: install_distro_packages.yml
+  loop_control:
+    loop_var: hashicorp_software_name
+  with_items: '{{ hashicorp_software_names }}'
+  when:
+    - lookup('vars', 'hashicorp_install_' + hashicorp_software_name | replace ('-', '_'), default=false)
+    - not (hashicorp_use_official_packages and hashicorp_official_packages_supported)
+    - hashicorp_use_distro_packages
+    - hashicorp_distro_packages_supported
+
+- name: Import task to ensure HashiCorp GPG public key is present in GPG store
+  include_tasks: gpg_setup.yml
+  when:
+    - hashicorp_check_gpg_signatures
+    - not (hashicorp_use_official_packages and hashicorp_official_packages_supported)
+
+
+# Install via ZIP file
+- block:
+    - name: Install unzip
+      become: true
+      package:
+        name: '{{ hashicorp_unzip_package | default("unzip") }}'
+
+    - name: Include task to install HashiCorp software
+      include_tasks: install_zip.yml
+      vars:
+        hashicorp_archive_url: "{{ hashicorp_mirror }}/{{ hashicorp_software_name }}/{{ hashicorp_software_version }}/\
+          {{ hashicorp_software_name }}_{{ hashicorp_software_version }}_{{ ansible_system | lower }}_{{ hashicorp_arch }}.zip"
+        hashicorp_archive_sha256_url: "{{ hashicorp_gpg_mirror }}/{{ hashicorp_software_name }}/{{ hashicorp_software_version }}\
+          /{{ hashicorp_software_name }}_{{ hashicorp_software_version }}_SHA256SUMS"
+        hashicorp_software_version: |-
+          {{ lookup('vars', 'hashicorp_' + hashicorp_software_name | replace ('-', '_') + '_version',
+             default=hashicorp_versions[hashicorp_software_name | replace ('-', '_')]) }}
+      loop_control:
+        loop_var: hashicorp_software_name
+      with_items: '{{ hashicorp_software_names }}'
+      when:
+        - lookup('vars', 'hashicorp_install_' + hashicorp_software_name | replace ('-', '_'), default=false)
+  when:
+    - not (hashicorp_use_official_packages and hashicorp_official_packages_supported)
+    - not (hashicorp_use_distro_packages and hashicorp_distro_packages_supported)

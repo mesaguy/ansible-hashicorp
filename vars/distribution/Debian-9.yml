@@ -1,0 +1,2 @@
+---
+hashicorp_official_packages_supported: '{% if ansible_architecture in ["amd64", "x86_64"] %}true{% else %}false{% endif %}'
