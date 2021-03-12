@@ -38,7 +38,6 @@
     loop_var: hashicorp_software_name
   with_items: '{{ hashicorp_software_names }}'
   when:
-    - lookup('vars', 'hashicorp_install_' + hashicorp_software_name | replace ('-', '_'), default=false)
     - not (hashicorp_use_official_packages and hashicorp_official_packages_supported)
     - hashicorp_use_distro_packages
     - hashicorp_distro_packages_supported

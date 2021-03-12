@@ -1,0 +1,5 @@
+---
+- name: Install {{ hashicorp_software_name }} via distro package
+  become: true
+  package:
+    name: "{{ lookup('vars', 'hashicorp_install_' + hashicorp_software_name | replace ('-', '_') + 'distro_package_name') }}"
