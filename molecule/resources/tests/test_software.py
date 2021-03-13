@@ -1,20 +1,26 @@
+import os
+
+
 import pytest
 
 
-SOFTWARE_NAMES = [
-    'boundary',
-    'consul',
-    'envconsul',
-    'nomad',
-    'packer',
-    'sentinel',
-    'serf',
-    'terraform',
-    'vagrant',
-    'vault',
-    'vault-ssh-helper',
-    'waypoint',
-]
+if os.getenv('HASHICORP_SOFTWARE_NAMES') is None:
+    SOFTWARE_NAMES = [
+        'boundary',
+        'consul',
+        'envconsul',
+        'nomad',
+        'packer',
+        'sentinel',
+        'serf',
+        'terraform',
+        'vagrant',
+        'vault',
+        'vault-ssh-helper',
+        'waypoint',
+    ]
+else:
+    SOFTWARE_NAMES = os.getenv('HASHICORP_SOFTWARE_NAMES').split(',')
 
 
 def check_binary_symlink(binary_file, dest_path):
