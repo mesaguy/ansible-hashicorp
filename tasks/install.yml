@@ -1,0 +1,36 @@
+---
+- name: Include task to install HashiCorp software via official packages
+  include_tasks: install_official_packages.yml
+  when:
+    - hashicorp_use_official_packages
+    - hashicorp_official_packages_supported
+
+- name: Include task to install HashiCorp software via distro packages
+  include_tasks: install_distro_packages.yml
+  when:
+    - not (hashicorp_use_official_packages and hashicorp_official_packages_supported)
+    - hashicorp_use_distro_packages
+    - hashicorp_distro_packages_supported
+
+- name: Import task to ensure HashiCorp GPG public key is present in GPG store
+  include_tasks: gpg_setup.yml
+  when:
+    - hashicorp_check_gpg_signatures
+    - not (hashicorp_use_official_packages and hashicorp_official_packages_supported)
+
+
+# Install via ZIP file
+- block:
+    - name: Include task to install HashiCorp software via zip
+      include_tasks: install_zip.yml
+      vars:
+        hashicorp_archive_url: "{{ hashicorp_mirror }}/{{ hashicorp_software_name }}/{{ hashicorp_software_version }}/\
+          {{ hashicorp_software_name }}_{{ hashicorp_software_version }}_{{ ansible_system | lower }}_{{ hashicorp_arch }}.zip"
+        hashicorp_archive_sha256_url: "{{ hashicorp_gpg_mirror }}/{{ hashicorp_software_name }}/{{ hashicorp_software_version }}\
+          /{{ hashicorp_software_name }}_{{ hashicorp_software_version }}_SHA256SUMS"
+        hashicorp_software_version: |-
+          {{ lookup('vars', 'hashicorp_' + hashicorp_software_name | replace ('-', '_') + '_version',
+             default=hashicorp_versions[hashicorp_software_name | replace ('-', '_')]) }}
+  when:
+    - not (hashicorp_use_official_packages and hashicorp_official_packages_supported)
+    - not (hashicorp_use_distro_packages and hashicorp_distro_packages_supported)

@@ -8,6 +8,14 @@
     hashicorp_software_dir: '{{ hashicorp_base_dir }}/{{ hashicorp_software_name }}'
     hashicorp_software_description: '{{ hashicorp_software_name | title }} {{ hashicorp_software_version }}'
 
+- name: Install unzip
+  become: true
+  package:
+    name: '{{ hashicorp_unzip_package | default("unzip") }}'
+  register: hashicorp_unzip_installed
+  when:
+    - hashicorp_unzip_installed is undefined
+
 - name: Create {{ hashicorp_software_description }} installation directories
   become: true
   ansible.builtin.file:

@@ -6,14 +6,16 @@
     - hashicorp_software_name not in hashicorp_official_package_names
 
 - block:
+    - name: Install apt-transport-https
+      become: true
+      package:
+        name: apt-transport-https
+
     - name: Add HashiCorp Apt repo GPG public key
       become: true
       ansible.builtin.apt_key:
-        data: "{{ lookup('file', 'files/hashicorp-apt.asc') }}"
+        data: "{{ lookup('file', '{{ role_path }}/files/hashicorp-apt.asc') }}"
         state: present
-
-    - debug:
-        msg: 'deb [arch={{ hashicorp_arch }}] {{ hashicorp_apt_mirror }} {{ ansible_distribution_release }} main'
 
     - name: Setup HashiCorp Apt repository
       become: true

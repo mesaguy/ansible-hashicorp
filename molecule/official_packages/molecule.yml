@@ -12,7 +12,6 @@ lint: |
   ansible-lint
 verifier:
   name: testinfra
-  directory: ../resources/tests/
 provisioner:
   name: ansible
   playbooks:
