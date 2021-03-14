@@ -11,7 +11,19 @@ function get_latest_docker() {
     curl -s "https://registry.hub.docker.com/v2/repositories/library/${NAME}/tags/" | jq -r '."results"[]["name"]' | grep -v '^latest$' | grep -vE '.*(\-alpha.*|\+ent.*|\-ent.*|\-connect.*|\-rc.*|\-beta.*)' | head -1
 }
 
-cat > vars/versions.yml << EOF
+function check_if_update () {
+    FILENAME="$1"
+    echo "Checking \"$FILENAME\" for changes"
+    if diff "$FILENAME" "${FILENAME}.tmp" ; then
+        # File content hasn't changed, remove new file
+        rm -f "${FILENAME}.tmp"
+    else
+        mv "${FILENAME}.tmp" "$FILENAME"
+        export UPDATED=1
+    fi
+}
+
+cat > vars/versions.yml.tmp << EOF
 ---
 boundary: $(get_latest boundary)
 consul: $(get_latest consul)
@@ -26,9 +38,15 @@ vault: $(get_latest vault)
 vault_ssh_helper: $(get_latest vault-ssh-helper False)
 waypoint: $(get_latest waypoint)
 EOF
+check_if_update vars/versions.yml
 
-cat > vars/docker_versions.yml << EOF
+cat > vars/docker_versions.yml.tmp << EOF
 ---
 consul: $(get_latest_docker consul)
 vault: $(get_latest_docker vault)
 EOF
+check_if_update vars/docker_versions.yml
+
+if [ -z "$UPDATED" ] ; then
+    exit 1
+fi
