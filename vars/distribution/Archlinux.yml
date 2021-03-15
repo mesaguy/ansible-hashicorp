@@ -1,0 +1,10 @@
+---
+hashicorp_distro_package_names:
+  # Update molecule/distro_packages/tests/test_software.py if changes are made
+
+  # Hashicorp package name (key) to Archlinux name (value)
+  consul: consul
+  packer: packer
+  terraform: terraform
+  vagrant: vagrant
+  vault: vault

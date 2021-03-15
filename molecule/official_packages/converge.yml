@@ -7,7 +7,6 @@
     hashicorp_install_consul: true
     hashicorp_install_nomad: true
     hashicorp_install_packer: true
-    hashicorp_install_serf: true
     hashicorp_install_terraform: true
     hashicorp_install_vagrant: true
     hashicorp_install_vault: true

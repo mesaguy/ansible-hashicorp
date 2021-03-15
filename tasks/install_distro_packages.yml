@@ -1,5 +1,11 @@
 ---
+- name: No distro package available
+  fail:
+    msg: '{{ hashicorp_software_name }} is not available as an distro package and must be installed as ZIP'
+  when:
+    - hashicorp_software_name not in hashicorp_distro_package_names
+
 - name: Install {{ hashicorp_software_name }} via distro package
   become: true
   package:
-    name: "{{ lookup('vars', 'hashicorp_install_' + hashicorp_software_name | replace ('-', '_') + 'distro_package_name') }}"
+    name: '{{ hashicorp_distro_package_names[hashicorp_software_name] }}'

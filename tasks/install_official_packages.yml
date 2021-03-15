@@ -28,6 +28,31 @@
     - ansible_os_family == 'Debian'
     - hashicorp_apt_repo_setup is undefined
 
+- block:
+    - name: Add HashiCorp Test yum repository
+      become: true
+      yum_repository:
+        name: hashicorp-test
+        description: Hashicorp Test - $basearch
+        baseurl: '{{ hashicorp_yum_mirror }}/{{ hashicorp_yum_release }}/$releasever/$basearch/test'
+        enabled: '{{ hashicorp_enable_yum_test_repo | default(0) }}'
+        gpgcheck: 1
+        gpgkey: https://rpm.releases.hashicorp.com/gpg
+
+    - name: Add HashiCorp Stable yum repository
+      become: true
+      yum_repository:
+        name: hashicorp
+        description: Hashicorp Stable - $basearch
+        baseurl: '{{ hashicorp_yum_mirror }}/{{ hashicorp_yum_release }}/$releasever/$basearch/stable'
+        enabled: 1
+        gpgcheck: 1
+        gpgkey: https://rpm.releases.hashicorp.com/gpg
+      register: hashicorp_yum_repo_setup
+  when:
+    - ansible_os_family == 'RedHat'
+    - hashicorp_yum_repo_setup is undefined
+
 - name: Install {{ hashicorp_software_name }}
   become: true
   ansible.builtin.package:

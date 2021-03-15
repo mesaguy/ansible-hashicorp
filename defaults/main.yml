@@ -31,3 +31,4 @@ hashicorp_software_state: present
 hashicorp_mirror: '{{ lookup("env", "HASHICORP_MIRROR") | default("https://releases.hashicorp.com", True) }}'
 hashicorp_gpg_mirror: '{{ lookup("env", "HASHICORP_GPG_MIRROR") | default("https://releases.hashicorp.com", True) }}'
 hashicorp_apt_mirror: '{{ lookup("env", "HASHICORP_APT_MIRROR") | default("https://apt.releases.hashicorp.com", True) }}'
+hashicorp_yum_mirror: '{{ lookup("env", "HASHICORP_YUM_MIRROR") | default("https://rpm.releases.hashicorp.com", True) }}'

@@ -2,25 +2,29 @@
 - name: Include task to install HashiCorp software via official packages
   include_tasks: install_official_packages.yml
   when:
+    # Only the AMD64/x86_64 architecture is officially supported
+    # https://www.hashicorp.com/blog/announcing-the-hashicorp-linux-repository
     - hashicorp_use_official_packages
     - hashicorp_official_packages_supported
 
 - name: Include task to install HashiCorp software via distro packages
   include_tasks: install_distro_packages.yml
   when:
+    - hashicorp_arch == 'amd64'
     - not (hashicorp_use_official_packages and hashicorp_official_packages_supported)
     - hashicorp_use_distro_packages
-    - hashicorp_distro_packages_supported
-
-- name: Import task to ensure HashiCorp GPG public key is present in GPG store
-  include_tasks: gpg_setup.yml
-  when:
-    - hashicorp_check_gpg_signatures
-    - not (hashicorp_use_official_packages and hashicorp_official_packages_supported)
+    - hashicorp_distro_package_names is defined and hashicorp_distro_package_names
 
 
 # Install via ZIP file
 - block:
+    - name: Import task to ensure HashiCorp GPG public key is present in GPG store
+      include_tasks: gpg_setup.yml
+      when:
+        - not (hashicorp_use_official_packages and hashicorp_official_packages_supported)
+        - hashicorp_check_gpg_signatures
+        - not (hashicorp_use_official_packages and hashicorp_official_packages_supported)
+
     - name: Include task to install HashiCorp software via zip
       include_tasks: install_zip.yml
       vars:
@@ -33,4 +37,4 @@
              default=hashicorp_versions[hashicorp_software_name | replace ('-', '_')]) }}
   when:
     - not (hashicorp_use_official_packages and hashicorp_official_packages_supported)
-    - not (hashicorp_use_distro_packages and hashicorp_distro_packages_supported)
+    - hashicorp_distro_package_names is undefined or not hashicorp_distro_package_names

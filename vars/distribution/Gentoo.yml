@@ -1,0 +1,12 @@
+---
+hashicorp_distro_package_names:
+  # Update molecule/distro_packages/tests/test_software.py if changes are made
+
+  # Hashicorp package name (key) to Gentoo portage name (value)
+  consul: app-admin/consul
+  nomad: sys-cluster/nomad
+  packer: dev-util/packer
+  serf: app-admin/serf
+  terraform: app-admin/terraform
+  vagrant: app-emulation/vagrant
+  vault: app-admin/vault

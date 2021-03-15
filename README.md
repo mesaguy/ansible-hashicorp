@@ -43,6 +43,16 @@ The following variables can be defined to install specific HashiCorp software:
     hashicorp_install_vault_ssh_helper: true
     hashicorp_install_waypoint: true
 
+Alternatively, HashiCorp software can be specified using the "hashicorp_install" variable when calling this role. When "hashicorp_install" is specified, the hashicorp_install_\* variables above will be ignored
+
+    - name: Include mesaguy.hashicorp to install specific software
+      include_role:
+        name: mesaguy.hashicorp
+      vars:
+        hashicorp_install:
+          - consul
+          - vault
+
 ### HashiCorp ZIP file installs
 
 By default, this role installs HashiCorp's ZIP files containing pre-compiled binaries using the variables below
@@ -104,9 +114,23 @@ Purge HashiCorp software installed via ZIP files, defaults to false:
 
     hashicorp_purge_zip_releases: true
 
+A local apt mirror can be specified using the "hashicorp_apt_mirror" ansible variable or "HASHICORP_APT_MIRROR" environmental variable:
+
+    hashicorp_apt_mirror: https://example.org/hashicorp/apt
+
+A local yum mirror can be specified using the "hashicorp_yum_mirror" ansible variable or "HASHICORP_YUM_MIRROR" environmental variable:
+
+    hashicorp_yum_mirror: https://example.org/hashicorp/yum
+
 State to keep HashiCorp software in, defaults to "present":
 
     hashicorp_software_state: latest
+
+When install HashiCorp's binary zip files, software version using the following syntax:
+
+    hashicorp_nomad_version: 1.0.1
+    hashicorp_vault_version: 1.0.1
+
 
 ### Use Distro packages instead of ZIP files
 
@@ -119,6 +143,10 @@ Currently, this option applies to ArchLinux only
 Purge HashiCorp software installed via ZIP files, defaults to false:
 
     hashicorp_purge_zip_releases: true
+
+The yum testing repository can be enabled via:
+
+    hashicorp_enable_yum_test_repo: true
 
 ## Dependencies
 
@@ -144,6 +172,7 @@ Default software release versions are controlled by the 'vars/versions.yml' and 
 These files can be updated manually or by running the ```scripts/update_versions``` script.
 
 ### Testing
+
 Tests are run via molecule.
 
 You will need [pipenv](https://pipenv.pypa.io) installed and [docker](https://www.docker.com) running in order to test.

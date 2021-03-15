@@ -1,0 +1,59 @@
+---
+- name: converge
+  hosts: all
+  vars:
+    hashicorp_use_distro_packages: true
+
+    # Purge all ZIP based releases
+    hashicorp_purge_zip_releases: true
+  tasks:
+    - block:
+        - name: Setup pacman package mirror
+          become: true
+          copy:
+            dest: /etc/pacman.d/mirrorlist
+            owner: root
+            group: root
+            mode: 0644
+            content: |
+              Server = {{ lookup("env", "HASHICORP_PACMAN_MIRROR") }}
+          when:
+            - lookup("env", "HASHICORP_PACMAN_MIRROR") | length > 1
+
+        - name: Run the equivalent of "pacman -Sy"
+          become: true
+          community.general.pacman:
+            update_cache: true
+          # Don't fail idempotence test for this
+          changed_when: false
+
+        - name: Include mesaguy.hashicorp role
+          ansible.builtin.include_role:
+            name: ansible-hashicorp
+          vars:
+            # Distro packages available in Archlinux
+            # Update molecule/distro_packages/tests/test_software.py if
+            # changes are made
+            hashicorp_install_consul: true
+            hashicorp_install_packer: true
+            hashicorp_install_terraform: true
+            hashicorp_install_vagrant: true
+            hashicorp_install_vault: true
+      when: ansible_distribution == 'Archlinux'
+
+    - block:
+        - name: Include mesaguy.hashicorp role
+          ansible.builtin.include_role:
+            name: ansible-hashicorp
+          vars:
+            # Distro packages available in Gentoo portage
+            # Update molecule/distro_packages/tests/test_software.py if
+            # changes are made
+            hashicorp_install_consul: true
+            hashicorp_install_nomad: true
+            hashicorp_install_packer: true
+            hashicorp_install_serf: true
+            hashicorp_install_terraform: true
+            hashicorp_install_vagrant: true
+            hashicorp_install_vault: true
+      when: ansible_distribution == 'Gentoo'
