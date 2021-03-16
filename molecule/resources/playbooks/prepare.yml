@@ -2,6 +2,18 @@
 - name: prepare
   hosts: all
   tasks:
+    - name: Create group "mail"
+      become: true
+      ansible.builtin.group:
+        name: mail
+        system: true
+
+    - name: Create user "mail"
+      become: true
+      ansible.builtin.user:
+        name: mail
+        system: true
+
     - name: Create directories for an old version of consul to be purged by role
       become: true
       ansible.builtin.file:
