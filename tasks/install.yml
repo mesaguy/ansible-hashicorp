@@ -29,7 +29,7 @@
       include_tasks: install_zip.yml
       vars:
         hashicorp_archive_url: "{{ hashicorp_mirror }}/{{ hashicorp_software_name }}/{{ hashicorp_software_version }}/\
-          {{ hashicorp_software_name }}_{{ hashicorp_software_version }}_{{ ansible_system | lower }}_{{ hashicorp_arch }}.zip"
+          {{ hashicorp_software_name }}_{{ hashicorp_software_version }}_{{ hashicorp_system_architecture }}.zip"
         hashicorp_archive_sha256_url: "{{ hashicorp_gpg_mirror }}/{{ hashicorp_software_name }}/{{ hashicorp_software_version }}\
           /{{ hashicorp_software_name }}_{{ hashicorp_software_version }}_SHA256SUMS"
         hashicorp_software_version: |-
@@ -37,4 +37,4 @@
              default=hashicorp_versions[hashicorp_software_name | replace ('-', '_')]) }}
   when:
     - not (hashicorp_use_official_packages and hashicorp_official_packages_supported)
-    - hashicorp_distro_package_names is undefined or not hashicorp_distro_package_names
+    - not hashicorp_use_distro_packages or hashicorp_distro_package_names is undefined or not hashicorp_distro_package_names
