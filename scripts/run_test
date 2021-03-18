@@ -1,8 +1,8 @@
 #!/bin/bash
 
 
-export MOLECULE_DOCKER_IMAGE="$1"
-export MOLECULE_DOCKER_INSTANCE_NAME=$(basename "$MOLECULE_DOCKER_IMAGE" | sed 's/:/_/g')
+export MOLECULE_DOCKER_IMAGE="$(echo $1 | sed -e 's/__/:/g' -e 's/--/\//g')"
+export MOLECULE_DOCKER_INSTANCE_NAME="$(basename "$1" | sed -e 's/__/_/g' -e 's/.*--//g')"
 SCENARIO="$2"
 if [ -n "$SCENARIO" ] ; then
     SCENARIO="-s $SCENARIO"
