@@ -1,0 +1,11 @@
+#!/bin/bash
+
+
+export MOLECULE_DOCKER_IMAGE="$1"
+export MOLECULE_DOCKER_INSTANCE_NAME=$(basename "$MOLECULE_DOCKER_IMAGE" | sed 's/:/_/g')
+SCENARIO="$2"
+if [ -n "$SCENARIO" ] ; then
+    SCENARIO="-s $SCENARIO"
+fi
+
+pipenv run molecule test $SCENARIO
