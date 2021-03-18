@@ -16,7 +16,6 @@ def test_installed(host):
                 'app-admin/consul',
                 'sys-cluster/nomad',
                 'dev-util/packer',
-                'app-admin/serf',
                 'app-admin/terraform',
                 'app-emulation/vagrant',
                 'app-admin/vault',

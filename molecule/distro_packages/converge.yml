@@ -8,6 +8,9 @@
     hashicorp_purge_zip_releases: true
   tasks:
     - block:
+        - name: Include Archlinux variables
+          include_vars: ../../vars/distribution/Archlinux.yml
+
         - name: Setup pacman package mirror
           become: true
           copy:
@@ -31,29 +34,60 @@
           ansible.builtin.include_role:
             name: ansible-hashicorp
           vars:
-            # Distro packages available in Archlinux
-            # Update molecule/distro_packages/tests/test_software.py if
-            # changes are made
-            hashicorp_install_consul: true
-            hashicorp_install_packer: true
-            hashicorp_install_terraform: true
-            hashicorp_install_vagrant: true
-            hashicorp_install_vault: true
+            hashicorp_install: '{{ hashicorp_distro_package_names.keys() | list }}'
       when: ansible_distribution == 'Archlinux'
 
     - block:
+        - name: Include Gentoo variables
+          include_vars: ../../vars/distribution/Gentoo.yml
+
+        - name: Create portage keywords directory
+          ansible.builtin.set_fact:
+            hashicorp_install: '{{ hashicorp_distro_package_names.keys() | list }}'
+
+        - name: Create portage keywords directory
+          become: true
+          ansible.builtin.file:
+            path: /etc/portage/package.accept_keywords
+            owner: root
+            group: root
+            mode: 0755
+            state: directory
+
+        - name: Create portage keyworks directory
+          become: true
+          ansible.builtin.copy:
+            dest: /etc/portage/package.accept_keywords/hashicorp
+            owner: root
+            group: root
+            mode: 0644
+            content: |
+              {% for name in hashicorp_distro_package_names %}
+              {{ hashicorp_distro_package_names[name] }}
+              {% endfor %}
+
+        - name: Allow all licenses
+          become: true
+          ansible.builtin.lineinfile:
+            path: /etc/portage/make.conf
+            regexp: ACCEPT_LICENSE.*
+            line: 'ACCEPT_LICENSE="*"'
+
+        - name: Disable usersandbox to allow Go to build in container
+          become: true
+          ansible.builtin.lineinfile:
+            path: /etc/portage/make.conf
+            regexp: FEATURE.*
+            line: FEATURES="-usersandbox"
+
+        - name: Install Git
+          # Required to build some of the HashiCorp software, but not
+          # automatically installed
+          become: true
+          ansible.builtin.package:
+            name: dev-vcs/git
+
         - name: Include mesaguy.hashicorp role
           ansible.builtin.include_role:
             name: ansible-hashicorp
-          vars:
-            # Distro packages available in Gentoo portage
-            # Update molecule/distro_packages/tests/test_software.py if
-            # changes are made
-            hashicorp_install_consul: true
-            hashicorp_install_nomad: true
-            hashicorp_install_packer: true
-            hashicorp_install_serf: true
-            hashicorp_install_terraform: true
-            hashicorp_install_vagrant: true
-            hashicorp_install_vault: true
       when: ansible_distribution == 'Gentoo'

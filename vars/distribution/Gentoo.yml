@@ -6,7 +6,7 @@ hashicorp_distro_package_names:
   consul: app-admin/consul
   nomad: sys-cluster/nomad
   packer: dev-util/packer
-  serf: app-admin/serf
   terraform: app-admin/terraform
-  vagrant: app-emulation/vagrant
+  # So many keywords and USE arguments needed to support
+  # vagrant: app-emulation/vagrant
   vault: app-admin/vault
