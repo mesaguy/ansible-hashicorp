@@ -22,4 +22,4 @@
 
     - name: Include mesaguy.hashicorp role
       ansible.builtin.include_role:
-        name: mesaguy.hashicorp
+        name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
