@@ -4,8 +4,8 @@ dependency:
 driver:
   name: docker
 platforms:
-  - name: ${MOLECULE_DOCKER_INSTANCE_NAME:-ansible-molecule-archlinux_latest}
-    image: ${MOLECULE_DOCKER_IMAGE:-mesaguy/ansible-molecule-archlinux:latest}
+  - name: ${IMAGE_DISTRO:-archlinux}
+    image: mesaguy/ansible-molecule-${IMAGE_DISTRO:-archlinux}:${IMAGE_TAG:-latest}
 lint: |
   set -e
   yamllint --config-file=tests/yamllint.yml .

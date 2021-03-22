@@ -1,8 +1,10 @@
 #!/bin/bash
 
+for VARIABLE in $(echo "$1" | sed 's/#/ /g')
+do
+    export $VARIABLE
+done
 
-export MOLECULE_DOCKER_IMAGE="$(echo $1 | sed -e 's/__/:/g' -e 's/--/\//g')"
-export MOLECULE_DOCKER_INSTANCE_NAME="$(basename "$1" | sed -e 's/__/_/g' -e 's/.*--//g')"
 SCENARIO="$2"
 if [ -n "$SCENARIO" ] ; then
     SCENARIO="-s $SCENARIO"
