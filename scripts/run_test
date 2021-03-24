@@ -10,4 +10,4 @@ if [ -n "$SCENARIO" ] ; then
     SCENARIO="-s $SCENARIO"
 fi
 
-pipenv run molecule test $SCENARIO
+molecule test $SCENARIO
