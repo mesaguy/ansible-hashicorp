@@ -26,8 +26,8 @@ else:
 def check_binary_symlink(binary_file, dest_path):
     assert binary_file.exists
     assert binary_file.is_symlink
-    assert binary_file.group == 'root'
     assert binary_file.user == 'root'
+    assert binary_file.group in ('staff', 'root')
     binary_file.linked_to == dest_path
 
 
@@ -96,7 +96,7 @@ def test_software_binary_symlink(name, host, binary_symlink_dir, hashicorp_dir,
     symlink_file = host.file(f'{binary_symlink_dir}/{name}')
     assert symlink_file.exists
     assert symlink_file.is_symlink
-    assert symlink_file.group == 'root'
+    assert symlink_file.group in ('staff', 'root')
     assert symlink_file.user == 'root'
     symlink_file.linked_to == dest_path
 
@@ -109,6 +109,6 @@ def test_software_active_dir_symlink(name, host, hashicorp_dir, hashicorp_versio
     active_symlink = host.file(f'{dir_base}/active')
     assert active_symlink.exists
     assert active_symlink.is_symlink
-    assert active_symlink.group == 'root'
     assert active_symlink.user == 'root'
+    assert active_symlink.group in ('staff', 'root')
     active_symlink.linked_to == dest_path
