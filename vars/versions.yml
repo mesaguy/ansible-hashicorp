@@ -6,7 +6,7 @@ nomad: 1.0.4
 packer: 1.7.0
 sentinel: 0.17.4
 serf: 0.8.2
-terraform: 0.14.8
+terraform: 0.14.9
 vagrant: 2.2.14
 vault: 1.6.3
 vault_ssh_helper: 0.2.1
