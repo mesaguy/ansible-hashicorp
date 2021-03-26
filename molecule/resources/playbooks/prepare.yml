@@ -39,6 +39,20 @@
         group: mail
         mode: 0777
 
+    - name: Install "ls" and other commands needed for testing Alpine
+      become: true
+      ansible.builtin.package:
+        name:
+          - coreutils
+          - gnupg
+      when: ansible_os_family == 'Alpine'
+
+    - name: Update pacman metadata
+      become: true
+      community.general.pacman:
+        update_cache: true
+      when: ansible_os_family == 'Archlinux'
+
     - block:
         - name: Update apt metadata
           become: true
@@ -51,11 +65,3 @@
           ansible.builtin.package:
             name: gnupg
       when: ansible_os_family == 'Debian'
-
-    - name: Install "ls" and other commands needed for testing Alpine
-      become: true
-      ansible.builtin.package:
-        name:
-          - coreutils
-          - gnupg
-      when: ansible_os_family == 'Alpine'
