@@ -183,8 +183,12 @@ Initialize the pipenv environment by running the following in the base directory
 
 The following can be used for basic validation. The first tests a normal install and the second scenario ensures GPG validation works:
 
-    MOLECULE_DISTRO=debian MOLECULE_TAG=debian-10 pipenv run molecule test
-    MOLECULE_DISTRO=debian MOLECULE_TAG=debian-10 pipenv run molecule test -s gpg
+    IMAGE_DISTRO=debian IMAGE_TAG=debian-10 pipenv run molecule test
+    IMAGE_DISTRO=debian IMAGE_TAG=debian-10 pipenv run molecule test -s gpg
+
+Selinux errors can generally be solved with:
+
+    pipenv run pip uninstall selinux -y; pipenv install
 
 ## License
 
