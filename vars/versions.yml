@@ -7,7 +7,7 @@ packer: 1.7.0
 sentinel: 0.18.0
 serf: 0.8.2
 terraform: 0.14.9
-vagrant: 2.2.14
+vagrant: 2.2.15
 vault: 1.7.0
 vault_ssh_helper: 0.2.1
 waypoint: 0.2.4
