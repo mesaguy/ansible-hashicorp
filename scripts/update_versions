@@ -48,5 +48,6 @@ EOF
 check_if_update vars/docker_versions.yml
 
 if [ -z "$UPDATED" ] ; then
-    exit 1
+    # No updates, return a non-standard exit value to signify a non-error
+    exit 3
 fi
