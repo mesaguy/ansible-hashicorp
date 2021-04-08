@@ -6,7 +6,10 @@ echo "-> Test ansible"
 if ! pipenv run ansible --version ; then
     echo "---> Ansible failed to run"
     echo "---> Reinstall SELinux libraries"
-    pipenv run pip uninstall selinux -y; pipenv install
+    pipenv run pip uninstall selinux -y
+    pipenv install
+    pipenv run pip uninstall ansible ansible-base --yes
+    pipenv install
 fi
 
 for VARIABLE in $(echo "$1" | sed 's/#/ /g')
