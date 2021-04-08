@@ -16,4 +16,4 @@ done
 
 shift
 
-echo pipenv run molecule $@
+pipenv run molecule $@
