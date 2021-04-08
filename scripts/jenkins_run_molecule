@@ -14,9 +14,6 @@ do
     export $VARIABLE
 done
 
-SCENARIO="$2"
-if [ -n "$SCENARIO" ] ; then
-    SCENARIO="-s $SCENARIO"
-fi
+shift
 
-pipenv run molecule test $SCENARIO
+echo pipenv run molecule $@
