@@ -27,6 +27,7 @@ cat > vars/versions.yml.tmp << EOF
 ---
 boundary: $(get_latest boundary)
 consul: $(get_latest consul)
+consul_template: $(get_latest consul-template)
 envconsul: $(get_latest envconsul)
 nomad: $(get_latest nomad)
 packer: $(get_latest packer)
@@ -35,7 +36,7 @@ serf: $(get_latest serf)
 terraform: $(get_latest terraform)
 vagrant: $(get_latest vagrant)
 vault: $(get_latest vault)
-vault_ssh_helper: $(get_latest vault-ssh-helper False)
+vault_ssh_helper: $(get_latest vault-ssh-helper)
 waypoint: $(get_latest waypoint)
 EOF
 check_if_update vars/versions.yml

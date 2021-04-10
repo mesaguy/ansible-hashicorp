@@ -4,6 +4,7 @@ Installs and updates the following [HashiCorp](https://www.hashicorp.com) softwa
 
 - Boundary
 - Consul
+- Consul Template
 - EnvConsul
 - Nomad
 - Packer
@@ -32,6 +33,7 @@ The following variables can be defined to install specific HashiCorp software:
 
     hashicorp_install_boundary: true
     hashicorp_install_consul: true
+    hashicorp_install_consul_template: true
     hashicorp_install_envconsul: true
     hashicorp_install_nomad: true
     hashicorp_install_packer: true

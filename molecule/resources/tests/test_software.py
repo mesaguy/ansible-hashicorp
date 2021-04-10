@@ -8,6 +8,7 @@ if os.getenv('HASHICORP_SOFTWARE_NAMES') is None:
     SOFTWARE_NAMES = [
         'boundary',
         'consul',
+        'consul-template',
         'envconsul',
         'nomad',
         'packer',

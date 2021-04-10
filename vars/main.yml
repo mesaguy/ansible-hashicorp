@@ -3,6 +3,7 @@
 hashicorp_software_names:
  - boundary
  - consul
+ - consul-template
  - envconsul
  - nomad
  - packer

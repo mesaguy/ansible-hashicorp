@@ -5,6 +5,7 @@
     # Install all HashiCorp software
     hashicorp_install_boundary: true
     hashicorp_install_consul: true
+    hashicorp_install_consul_template: true
     hashicorp_install_envconsul: true
     hashicorp_install_nomad: true
     hashicorp_install_packer: true
