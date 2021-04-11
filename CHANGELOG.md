@@ -6,11 +6,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2021-04-11
+
+### Added
+- Consul Template support
+- Expanded documentation
+- Official Apt/Yum support
+- Unofficial packages via distro package manager support
+
+### Changed
+- Upgrade consul from v1.9.3 to v1.9.4
+- Upgrade packer from v1.7.0 to v1.7.2
+- Upgrade terraform from v0.14.8 to v0.14.10
+- Upgrade sentinel from v0.17.4 to v0.18.0
+- Upgrade waypoint from v0.2.3 to v0.3.0
+- Upgrade vault from v1.6.3 to v1.7.0
+- Upgrade vagrant from v2.2.14 to v2.2.15
+
 ## [0.1.3] - 2021-03-05
+
+### Changed
 - Upgrade consul from v1.9.3 to v1.9.4
 - Upgrade vault from v1.6.2 to v1.6.3
 
 ## [0.1.2] - 2021-02-27
+
+### Changed
 - Upgrade nomad from v1.0.3 to 1.0.4
 - Upgrade vault from v1.6.2 to v1.6.3
 - Upgrade waypoint from v0.2.2 to 0.2.3
