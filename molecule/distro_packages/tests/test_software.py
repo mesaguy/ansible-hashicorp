@@ -9,7 +9,7 @@ def test_installed(host):
                 'terraform',
                 'vagrant',
                 'vault',
-            )
+            ):
             assert host.package(name).is_installed
     elif os.environ['MOLECULE_DISTRO'] == 'gentoo':
         for name in (
@@ -19,7 +19,7 @@ def test_installed(host):
                 'app-admin/terraform',
                 'app-emulation/vagrant',
                 'app-admin/vault',
-            )
+            ):
             assert host.package(name).is_installed
     else:
         assert False, 'No tests defined'
