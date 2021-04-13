@@ -27,7 +27,7 @@
           become: true
           community.general.pacman:
             update_cache: true
-          # Don't fail idempotence test for this
+          # Don't fail idempotent test for this
           changed_when: false
 
         - name: Include mesaguy.hashicorp role

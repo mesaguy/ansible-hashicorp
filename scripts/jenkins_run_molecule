@@ -3,7 +3,7 @@
 pipenv install
 
 echo "-> Test ansible"
-if ! pipenv run ansible --version ; then
+if ! pipenv run ansible --version || ! pipenv run ansible --version ; then
     echo "---> Ansible failed to run"
     echo "---> Reinstall SELinux libraries"
     pipenv run pip uninstall selinux -y

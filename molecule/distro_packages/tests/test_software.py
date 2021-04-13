@@ -2,7 +2,7 @@ import os
 
 
 def test_installed(host):
-    if os.environ['MOLECULE_DISTRO'] == 'archlinux':
+    if os.environ['IMAGE_DISTRO'] == 'archlinux':
         for name in (
                 'consul',
                 'packer',
@@ -11,7 +11,7 @@ def test_installed(host):
                 'vault',
             ):
             assert host.package(name).is_installed
-    elif os.environ['MOLECULE_DISTRO'] == 'gentoo':
+    elif os.environ['IMAGE_DISTRO'] == 'gentoo':
         for name in (
                 'app-admin/consul',
                 'sys-cluster/nomad',
