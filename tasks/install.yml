@@ -1,4 +1,10 @@
 ---
+- name: Determine if specific version is set
+  set_fact:
+    hashicorp_software_specific_version: "{% if hashicorp_software_specific_version | bool and hashicorp_software_specific_version | length > 1 %}\
+      {{ hashicorp_software_specific_version }}\
+      {% endif %}"
+
 - name: Include task to install HashiCorp software via official packages
   include_tasks: install_official_packages.yml
   when:
@@ -32,9 +38,9 @@
           {{ hashicorp_software_name }}_{{ hashicorp_software_version }}_{{ hashicorp_system_architecture }}.zip"
         hashicorp_archive_sha256_url: "{{ hashicorp_gpg_mirror }}/{{ hashicorp_software_name }}/{{ hashicorp_software_version }}\
           /{{ hashicorp_software_name }}_{{ hashicorp_software_version }}_SHA256SUMS"
-        hashicorp_software_version: |-
-          {{ lookup('vars', 'hashicorp_' + hashicorp_software_name | replace ('-', '_') + '_version',
-             default=hashicorp_versions[hashicorp_software_name | replace ('-', '_')]) }}
+        hashicorp_software_version: "{{ hashicorp_software_specific_version | \
+          default(lookup('vars', 'hashicorp_' + hashicorp_software_name | replace ('-', '_') + '_version',\
+          default=hashicorp_versions[hashicorp_software_name | replace ('-', '_')]), true) }}"
   when:
     - not (hashicorp_use_official_packages and hashicorp_official_packages_supported)
     - not hashicorp_use_distro_packages or hashicorp_distro_package_names is undefined or not hashicorp_distro_package_names

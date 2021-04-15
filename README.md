@@ -45,14 +45,17 @@ The following variables can be defined to install specific HashiCorp software:
     hashicorp_install_vault_ssh_helper: true
     hashicorp_install_waypoint: true
 
-Alternatively, HashiCorp software can be specified using the "hashicorp_install" variable when calling this role. When "hashicorp_install" is specified, the hashicorp_install_\* variables above will be ignored
+Alternatively, HashiCorp software can be specified using the "hashicorp_install" variable when calling this role. When "hashicorp_install" is specified, the hashicorp_install_\* variables above will be ignored. This syntax also supports optionally specifying a version:
 
     - name: Include mesaguy.hashicorp to install specific software
       include_role:
         name: mesaguy.hashicorp
       vars:
         hashicorp_install:
-          - consul
+          # Install Consul version 1.0.0
+          - consul==1.0.0
+          # Install the latest versions of packer and vault
+          - packer
           - vault
 
 ### HashiCorp ZIP file installs

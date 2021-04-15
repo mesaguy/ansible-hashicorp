@@ -23,16 +23,18 @@
           when:
             - lookup("env", "HASHICORP_PACMAN_MIRROR") | length > 1
 
-        - name: Run the equivalent of "pacman -Sy"
+        - name: Update pacman cache, "pacman -Syyu"
           become: true
-          community.general.pacman:
-            update_cache: true
+          ansible.builtin.command: pacman -Syyu
+          register: hashicorp_update_pacman_cache
           # Don't fail idempotent test for this
           changed_when: false
+          when:
+            - hashicorp_update_pacman_cache is undefined
 
         - name: Include mesaguy.hashicorp role
           ansible.builtin.include_role:
-            name: ansible-hashicorp
+            name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
           vars:
             hashicorp_install: '{{ hashicorp_distro_package_names.keys() | list }}'
       when: ansible_distribution == 'Archlinux'

@@ -56,5 +56,7 @@
 - name: Install {{ hashicorp_software_name }}
   become: true
   ansible.builtin.package:
-    name: '{{ hashicorp_software_name }}'
+    name: "{{ hashicorp_software_name }}{% if hashicorp_software_specific_version %}\
+      {% if ansible_os_family == 'RedHat' %}-{% else %}={% endif %}\
+      {{ hashicorp_software_specific_version }}{% endif %}"
     state: '{{ hashicorp_software_state }}'

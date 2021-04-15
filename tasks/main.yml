@@ -28,11 +28,16 @@
 - name: Install specific HashiCorp software
   include_tasks: install.yml
   loop_control:
-    loop_var: hashicorp_software_name
-  with_items: '{{ hashicorp_software_names }}'
+    loop_var: hashicorp_install_name
+  with_items: '{{ hashicorp_install }}'
+  vars:
+    hashicorp_software_name: '{{ hashicorp_install_name | regex_replace("==.*", "") }}'
+    hashicorp_software_specific_version: "{% if '==' in hashicorp_install_name %}\
+      {{ (hashicorp_install_name | regex_replace('.*==', '')) | default('', true) }}\
+      {% endif %}"
   when:
     - hashicorp_install is defined
-    - hashicorp_software_name in hashicorp_install
+    - hashicorp_install_name | regex_replace("==.*", "") in hashicorp_software_names
 
 - name: Install HashiCorp software
   include_tasks: install.yml

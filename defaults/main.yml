@@ -23,6 +23,9 @@ hashicorp_purge_zip_releases: false
 # State to keep distro and official packages in (Generally 'present' or 'latest'):
 hashicorp_software_state: present
 
+# May be automatically overridden in role variables depending on the Distro
+hashicorp_official_packages_supported: false
+
 ###############################################################################
 # Mirrors
 ###############################################################################
