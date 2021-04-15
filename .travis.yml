@@ -1,0 +1,28 @@
+---
+language: python
+dist: focal
+python:
+  - '3.8'
+env:
+  - MOLECULE_SCENARIO=default           IMAGE_DISTRO=centos8 IMAGE_TAG=centos-8.3
+  - MOLECULE_SCENARIO=default           IMAGE_DISTRO=debian IMAGE_TAG=debian-9
+  - MOLECULE_SCENARIO=default           IMAGE_DISTRO=archlinux IMAGE_TAG=latest
+  - MOLECULE_SCENARIO=gpg               IMAGE_DISTRO=centos8 IMAGE_TAG=centos-8.3
+  - MOLECULE_SCENARIO=gpg               IMAGE_DISTRO=debian IMAGE_TAG=debian-9
+  - MOLECULE_SCENARIO=gpg               IMAGE_DISTRO=archlinux IMAGE_TAG=latest
+  - MOLECULE_SCENARIO=official_packages IMAGE_DISTRO=centos8 IMAGE_TAG=centos-8.3
+  - MOLECULE_SCENARIO=official_packages IMAGE_DISTRO=debian IMAGE_TAG=debian-9
+  - MOLECULE_SCENARIO=distro_packages   IMAGE_DISTRO=archlinux IMAGE_TAG=latest
+  - MOLECULE_SCENARIO=unconfigured      IMAGE_DISTRO=centos8 IMAGE_TAG=centos-8.3
+  - MOLECULE_SCENARIO=unconfigured      IMAGE_DISTRO=debian IMAGE_TAG=debian-9
+  - MOLECULE_SCENARIO=unconfigured      IMAGE_DISTRO=archlinux IMAGE_TAG=latest
+
+services:
+  - docker
+
+install:
+  - pip install pipenv --upgrade-strategy=only-if-needed
+  - pipenv install
+
+script:
+  - pipenv run molecule test -s $MOLECULE_SCENARIO
