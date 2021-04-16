@@ -58,7 +58,6 @@
           become: true
           ansible.builtin.apt:
             update_cache: true
-            cache_valid_time: 7200
 
         - name: Install "gpg" for testing Debian and Ubuntu
           become: true

@@ -23,9 +23,9 @@
           when:
             - lookup("env", "HASHICORP_PACMAN_MIRROR") | length > 1
 
-        - name: Update pacman cache, "pacman -Syyu"
+        - name: Update pacman cache, "pacman -Syy"
           become: true
-          ansible.builtin.command: pacman -Syyu
+          ansible.builtin.command: pacman -Syy
           register: hashicorp_update_pacman_cache
           # Don't fail idempotent test for this
           changed_when: false
