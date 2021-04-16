@@ -1,4 +1,5 @@
 # Ansible HashiCorp
+[![Build Status](https://api.travis-ci.org/mesaguy/ansible-hashicorp.svg?branch=master)](https://travis-ci.org/mesaguy/ansible-hashicorp) ![Latest tag](https://img.shields.io/github/v/tag/mesaguy/ansible-hashicorp) ![Ansible Galaxy](https://img.shields.io/badge/ansible%20galaxy-mesaguy.hashicorp-blue.svg?style=flat) ![MIT License](https://img.shields.io/github/license/mesaguy/ansible-hashicorp)
 
 Installs and updates the following [HashiCorp](https://www.hashicorp.com) software:
 
