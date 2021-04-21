@@ -9,6 +9,6 @@ sentinel: 0.18.0
 serf: 0.8.2
 terraform: 0.15.0
 vagrant: 2.2.15
-vault: 1.7.0
+vault: 1.7.1
 vault_ssh_helper: 0.2.1
 waypoint: 0.3.1
