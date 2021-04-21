@@ -11,4 +11,4 @@ terraform: 0.15.0
 vagrant: 2.2.15
 vault: 1.7.0
 vault_ssh_helper: 0.2.1
-waypoint: 0.3.0
+waypoint: 0.3.1
