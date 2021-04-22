@@ -9,3 +9,7 @@
   become: true
   package:
     name: '{{ hashicorp_distro_package_names[hashicorp_software_name] }}'
+  register: hashicorp_package_install
+  retries: 5
+  delay: 10
+  until: hashicorp_package_install is succeeded

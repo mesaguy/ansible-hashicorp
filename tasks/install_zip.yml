@@ -12,6 +12,9 @@
   become: true
   package:
     name: '{{ hashicorp_unzip_package | default("unzip") }}'
+  retries: 5
+  delay: 10
+  until: hashicorp_unzip_installed is succeeded
   register: hashicorp_unzip_installed
   when:
     - hashicorp_unzip_installed is undefined

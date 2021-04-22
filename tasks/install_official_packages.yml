@@ -60,3 +60,7 @@
       {% if ansible_os_family == 'RedHat' %}-{% else %}={% endif %}\
       {{ hashicorp_software_specific_version }}{% endif %}"
     state: '{{ hashicorp_software_state }}'
+  register: hashicorp_package_install
+  retries: 5
+  delay: 10
+  until: hashicorp_package_install is succeeded
