@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.1] - 2021-04-23
+
+### Added
+- Add new HashiCorp GPG public key used to sign zip packages
+
+### Changed
+- Upgrade vault from v1.7.0 to v1.7.1
+- Upgrade waypoint from v0.3.0 to v0.3.1
 
 ## [0.3.0] - 2021-04-16
 
@@ -13,7 +21,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support specifying the version of software to install
 
 ### Changed
-
 - Upgrade boundary from v0.1.8 to v0.2.0
 - Upgrade consul from v1.9.4 to v1.9.5
 - Upgrade terraform from v0.14.10 to v0.15.0
