@@ -20,7 +20,7 @@
     - name: Setup HashiCorp Apt repository
       become: true
       ansible.builtin.apt_repository:
-        repo: 'deb [arch={{ hashicorp_arch }}] {{ hashicorp_apt_mirror }} {{ ansible_distribution_release }} main'
+        repo: 'deb [arch={{ hashicorp_arch }}] {{ hashicorp_apt_mirror }} {{ hashicorp_apt_repo_release | default(ansible_distribution_release) }} main'
         state: present
         filename: hashicorp
       register: hashicorp_apt_repo_setup
