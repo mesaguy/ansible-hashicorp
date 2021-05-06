@@ -16,7 +16,7 @@
        cat << EOF | gpg --import
        {{ lookup("file", "files/hashicorp-20140226.asc") }}
        EOF
-  when: not 'C874011F0AB405110D02105534365D9472D7468F' in gpg_output.stdout
+  when: not '91A6E7F85D05C65630BEF18951852D87348FFC4C' in gpg_output.stdout
 
 - name: Import HashiCorp's 2021 GPG public key
   become: true
@@ -25,4 +25,4 @@
        cat << EOF | gpg --import
        {{ lookup("file", "files/hashicorp-20210419.asc") }}
        EOF
-  when: not '91A6E7F85D05C65630BEF18951852D87348FFC4C' in gpg_output.stdout
+  when: not 'C874011F0AB405110D02105534365D9472D7468F' in gpg_output.stdout
