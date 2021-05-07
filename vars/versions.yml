@@ -1,5 +1,5 @@
 ---
-boundary: 0.2.0
+boundary: 0.2.1
 consul: 1.9.5
 consul_template: 0.25.2
 envconsul: 0.11.0
@@ -7,7 +7,7 @@ nomad: 1.0.4
 packer: 1.7.2
 sentinel: 0.18.0
 serf: 0.8.2
-terraform: 0.15.2
+terraform: 0.15.3
 vagrant: 2.2.16
 vault: 1.7.1
 vault_ssh_helper: 0.2.1
