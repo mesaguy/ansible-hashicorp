@@ -20,6 +20,9 @@ env:
 services:
   - docker
 
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/?branch=master
+
 install:
   - pip install pipenv --upgrade-strategy=only-if-needed
   - pipenv install
