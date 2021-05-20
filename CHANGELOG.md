@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.4] - 2021-05-20
+
+### Changed
+- Upgrade vault from v1.7.1 to v1.7.2
+
 ## [0.3.3] - 2021-05-19
 
 ### Changed
