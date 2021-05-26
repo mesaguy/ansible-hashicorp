@@ -20,6 +20,9 @@ env:
 services:
   - docker
 
+before_install:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
 install:
   - pip install pipenv --upgrade-strategy=only-if-needed
   - pipenv install
