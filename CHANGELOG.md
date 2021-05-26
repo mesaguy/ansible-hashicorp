@@ -6,6 +6,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.5] - 2021-05-26
+
+### Changed
+- Upgrade boundary from v0.2.2 to v0.2.3
+- Upgrade vault from v1.7.1 to v1.7.2
+
+## [0.3.4] - 2021-05-20
+
+### Changed
+- Upgrade vault from v1.7.1 to v1.7.2
+
+## [0.3.3] - 2021-05-19
+
+### Changed
+- Upgrade boundary from v0.2.1 to v0.2.2
+- Upgrade terraform from v0.15.3 to v0.15.4
+
+## [0.3.2] - 2021-05-19
+
+### Changed
+- Check if Hashicorp's new and old GPG public keys are installed separately and install separately
+- Separate Hashicorp's new and old GPG public keys into their own files
+- Upgrade boundary from v0.2.0 to v0.2.1
+- Upgrade nomad from v1.0.4 to v1.1.0
+- Upgrade sentinel from v0.18.0 to v0.18.2
+- Upgrade terraform from v0.15.0 to v0.15.3
+- Upgrade vagrant from v2.2.15 to v2.2.16
+- Upgrade waypoint from v0.3.1 to v0.3.2
+
 ## [0.3.1] - 2021-04-23
 
 ### Added

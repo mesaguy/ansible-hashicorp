@@ -23,6 +23,9 @@ services:
 before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/?branch=master
+
 install:
   - pip install pipenv --upgrade-strategy=only-if-needed
   - pipenv install
