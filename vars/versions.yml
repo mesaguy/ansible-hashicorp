@@ -5,10 +5,10 @@ consul_template: 0.25.2
 envconsul: 0.11.0
 nomad: 1.1.0
 packer: 1.7.2
-sentinel: 0.18.2
+sentinel: 0.18.3
 serf: 0.8.2
-terraform: 0.15.4
+terraform: 0.15.5
 vagrant: 2.2.16
 vault: 1.7.2
 vault_ssh_helper: 0.2.1
-waypoint: 0.3.2
+waypoint: 0.4.0

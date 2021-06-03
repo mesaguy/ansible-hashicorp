@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.6] - 2021-06-03
+
+### Changed
+- Upgrade sentinel from v0.18.2 to v0.18.3
+- Upgrade terraform from v0.15.4 to v0.15.5
+- Upgrade waypoint from v0.3.2 to v0.4.0
+
 ## [0.3.5] - 2021-05-26
 
 ### Changed
