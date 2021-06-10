@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.9] - 2021-06-10
+
+### Changed
+- Upgrade boundary from v0.2.3 to v0.3.0
+- Upgrade nomad from v1.1.0 to v1.1.1
+
 ## [0.3.8] - 2021-06-08
 
 ### Changed
