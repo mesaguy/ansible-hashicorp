@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.14] - 2021-07-01
+
+### Changed
+- Upgrade boundary from v0.3.0 to v0.4.0
+
 ## [0.3.13] - 2021-06-24
 
 ### Changed
