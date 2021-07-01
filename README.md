@@ -1,5 +1,5 @@
 # Ansible HashiCorp
-[![Build Status](https://api.travis-ci.org/mesaguy/ansible-hashicorp.svg?branch=master)](https://travis-ci.org/mesaguy/ansible-hashicorp) ![Latest tag](https://img.shields.io/github/v/tag/mesaguy/ansible-hashicorp) ![Ansible Galaxy](https://img.shields.io/badge/ansible%20galaxy-mesaguy.hashicorp-blue.svg?style=flat) ![MIT License](https://img.shields.io/github/license/mesaguy/ansible-hashicorp)
+![Molecule tests](https://github.com/mesaguy/ansible-hashicorp/actions/workflows/test.yml/badge.svg) ![Latest tag](https://img.shields.io/github/v/tag/mesaguy/ansible-hashicorp) ![Ansible Galaxy](https://img.shields.io/badge/ansible%20galaxy-mesaguy.hashicorp-blue.svg?style=flat) ![MIT License](https://img.shields.io/github/license/mesaguy/ansible-hashicorp)
 
 Install [HashiCorp](https://www.hashicorp.com) software using official packages, official zip files, and distro packages.
 
