@@ -8,7 +8,7 @@ platforms:
     image: mesaguy/ansible-molecule-${IMAGE_DISTRO:-archlinux}:${IMAGE_TAG:-latest}
 lint: |
   set -e
-  yamllint --config-file=tests/yamllint.yml .
+  yamllint --config-file=tests/yamllint.yml meta tasks vars
   ansible-lint
 verifier:
   name: testinfra
