@@ -9,7 +9,7 @@ platforms:
 lint: |
   set -e
   yamllint --config-file=tests/yamllint.yml meta tasks vars
-  ansible-lint
+  ansible-lint tasks molecule
 verifier:
   name: testinfra
 provisioner:
