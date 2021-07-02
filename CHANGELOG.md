@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.15] - 2021-07-02
+
+### Changed
+- Upgrade waypoint from v0.4.0 to v0.4.1
+
 ## [0.3.14] - 2021-07-01
 
 ### Changed
