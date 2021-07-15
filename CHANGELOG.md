@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.17] - 2021-07-15
+
+### Changed
+- Upgrade consul from v1.10.0 to v1.10.1
+
 ## [0.3.16] - 2021-07-08
 
 ### Changed
