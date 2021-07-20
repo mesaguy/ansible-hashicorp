@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.18] - 2021-07-20
+
+### Changed
+- Upgrade packer from v1.7.3 to v1.7.4
+
 ## [0.3.17] - 2021-07-15
 
 ### Changed
