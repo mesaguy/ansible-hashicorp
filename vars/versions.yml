@@ -1,5 +1,5 @@
 ---
-boundary: 0.5.1
+boundary: 0.6.0
 consul: 1.10.2
 consul_template: 0.27.0
 envconsul: 0.11.0
