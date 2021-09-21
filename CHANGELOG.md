@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.26] - 2021-09-21
+
+### Changed
+- Upgrade boundary from v0.6.0 to v0.6.1
+- Upgrade nomad from v1.1.4 to v1.1.5
+- Upgrade packer from v1.7.4 to v1.7.5
+- Upgrade terraform from v1.0.6 to v1.0.7
+- Upgrade waypoint from v0.5.1 to v0.5.2
+
 ## [0.3.25] - 2021-09-09
 
 ### Changed
