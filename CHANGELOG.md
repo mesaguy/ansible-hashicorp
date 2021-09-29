@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.30] - 2021-09-29
+
+### Changed
+- Upgrade terraform from v1.0.7 to v1.0.8
+- Upgrade vault from v1.8.2 to v1.8.3
+
 ## [0.3.29] - 2021-09-29
 
 ### Changed
