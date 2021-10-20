@@ -4,11 +4,11 @@ consul: 1.10.3
 consul_template: 0.27.1
 envconsul: 0.12.0
 nomad: 1.1.6
-packer: 1.7.6
+packer: 1.7.7
 sentinel: 0.18.4
 serf: 0.8.2
-terraform: 1.0.8
+terraform: 1.0.9
 vagrant: 2.2.18
 vault: 1.8.4
 vault_ssh_helper: 0.2.1
-waypoint: 0.5.2
+waypoint: 0.6.0
