@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.38] - 2021-11-05
+
+### Changed
+- Upgrade consul_template from v0.27.1 to v0.27.2
+- Upgrade vault from v1.8.4 to v1.8.5
+- Upgrade waypoint from v0.6.1 to v0.6.2
+
 ## [0.3.37] - 2021-11-04
 
 ### Changed
