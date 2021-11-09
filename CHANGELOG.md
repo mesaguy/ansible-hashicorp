@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.39] - 2021-11-09
+
+### Changed
+- Upgrade vagrant from v2.2.18 to v2.2.19
+
 ## [0.3.38] - 2021-11-05
 
 ### Changed
