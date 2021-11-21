@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.42] - 2021-11-21
+
+### Changed
+- Upgrade boundary from v0.6.2 to v0.7.1
+- Upgrade envconsul from v0.12.0 to v0.12.1
+- Upgrade nomad from v1.2.0 to v1.2.1
+- Upgrade vault from v1.8.5 to v1.9.0
+
 ## [0.3.41] - 2021-11-17
 
 ### Changed
