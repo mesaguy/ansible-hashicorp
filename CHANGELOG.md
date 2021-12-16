@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.45] - 2021-12-16
+
+### Changed
+- Upgrade boundary from v0.7.1 to v0.7.2
+- Upgrade consul from v1.10.4 to v1.11.1
+- Upgrade nomad from v1.2.2 to v1.2.3
+- Upgrade terraform from v1.1.0 to v1.1.1
+- Upgrade vault from v1.9.0 to v1.9.1
+- Upgrade waypoint from v0.6.2 to v0.6.3
+
 ## [0.3.44] - 2021-12-09
 
 ### Changed
