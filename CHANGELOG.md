@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.49] - 2022-01-27
+
+### Changed
+- Upgrade vault from v1.9.2 to v1.9.3
+- Upgrade waypoint from v0.7.0 to v0.7.1
+
 ## [0.3.48] - 2022-01-20
 
 ### Changed
