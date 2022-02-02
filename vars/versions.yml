@@ -3,9 +3,9 @@ boundary: 0.7.4
 consul: 1.11.2
 consul_template: 0.27.2
 envconsul: 0.12.1
-nomad: 1.2.4
+nomad: 1.2.5
 packer: 1.7.9
-sentinel: 0.18.5
+sentinel: 0.18.6
 serf: 0.8.2
 terraform: 1.1.4
 vagrant: 2.2.19
