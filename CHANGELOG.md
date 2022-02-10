@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.52] - 2022-02-10
+
+### Changed
+- Upgrade nomad from v1.2.5 to v1.2.6
+
 ## [0.3.51] - 2022-02-04
 
 ### Changed
