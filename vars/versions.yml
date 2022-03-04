@@ -1,14 +1,14 @@
 ---
 boundary: 0.7.5
-consul: 1.11.3
-consul_template: 0.27.2
+consul: 1.11.4
+consul_template: 0.28.0
 envconsul: 0.12.1
 nomad: 1.2.6
 packer: 1.7.10
-sentinel: 0.18.6
+sentinel: 0.18.7
 serf: 0.8.2
-terraform: 1.1.6
+terraform: 1.1.7
 vagrant: 2.2.19
-vault: 1.9.3
+vault: 1.9.4
 vault_ssh_helper: 0.2.1
-waypoint: 0.7.1
+waypoint: 0.7.2
