@@ -4,7 +4,7 @@ consul: 1.11.4
 consul_template: 0.28.0
 envconsul: 0.12.1
 nomad: 1.2.6
-packer: 1.7.10
+packer: 1.8.0
 sentinel: 0.18.7
 serf: 0.8.2
 terraform: 1.1.7
