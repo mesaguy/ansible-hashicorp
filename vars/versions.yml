@@ -1,6 +1,6 @@
 ---
 boundary: 0.7.6
-consul: 1.11.4
+consul: 1.11.5
 consul_template: 0.28.1
 envconsul: 0.12.1
 nomad: 1.2.6
