@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.65] - 2022-05-24
+
+### Changed
+- Upgrade nomad from v1.3.0 to v1.3.1
+- Upgrade sentinel from v0.18.9 to v0.18.10
+- Upgrade terraform from v1.2.0 to v1.2.1
+- Upgrade waypoint from v0.8.1 to v0.8.2
+
 ## [0.3.64] - 2022-05-19
 
 ### Changed
