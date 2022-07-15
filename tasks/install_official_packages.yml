@@ -1,6 +1,6 @@
 ---
 - name: No official package available
-  fail:
+  ansible.builtin.fail:
     msg: '{{ hashicorp_software_name }} is not available as an official package and must be installed as ZIP'
   when:
     - hashicorp_software_name not in hashicorp_official_package_names
@@ -8,7 +8,7 @@
 - block:
     - name: Install apt-transport-https
       become: true
-      package:
+      ansible.builtin.package:
         name: apt-transport-https
 
     - name: Add HashiCorp Apt repo GPG public key
@@ -29,6 +29,11 @@
           # HashiCorp official
           ###############################################################################
           deb [arch={{ hashicorp_arch }}] {{ hashicorp_apt_mirror }} {{ hashicorp_apt_repo_release | default(ansible_distribution_release) }} main
+
+    - name: Update Apt package data
+      become: true
+      ansible.builtin.apt:
+        update_cache: true
       register: hashicorp_apt_repo_setup
   when:
     - ansible_os_family == 'Debian'
