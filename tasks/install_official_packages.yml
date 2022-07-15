@@ -19,10 +19,16 @@
 
     - name: Setup HashiCorp Apt repository
       become: true
-      ansible.builtin.apt_repository:
-        repo: 'deb [arch={{ hashicorp_arch }}] {{ hashicorp_apt_mirror }} {{ hashicorp_apt_repo_release | default(ansible_distribution_release) }} main'
-        state: present
-        filename: hashicorp
+      ansible.builtin.copy:
+        dest: /etc/apt/sources.list.d/hashicorp.list
+        owner: root
+        group: root
+        mode: 0644
+        content: |
+          ###############################################################################
+          # HashiCorp official
+          ###############################################################################
+          deb [arch={{ hashicorp_arch }}] {{ hashicorp_apt_mirror }} {{ hashicorp_apt_repo_release | default(ansible_distribution_release) }} main
       register: hashicorp_apt_repo_setup
   when:
     - ansible_os_family == 'Debian'
