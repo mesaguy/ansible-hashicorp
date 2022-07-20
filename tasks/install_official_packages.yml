@@ -29,12 +29,12 @@
           # HashiCorp official
           ###############################################################################
           deb [arch={{ hashicorp_arch }}] {{ hashicorp_apt_mirror }} {{ hashicorp_apt_repo_release | default(ansible_distribution_release) }} main
+      register: hashicorp_apt_repo_setup
 
     - name: Update Apt package data
       become: true
       ansible.builtin.apt:
         update_cache: true
-      register: hashicorp_apt_repo_setup
   when:
     - ansible_os_family == 'Debian'
     - hashicorp_apt_repo_setup is undefined
