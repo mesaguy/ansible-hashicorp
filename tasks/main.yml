@@ -18,7 +18,7 @@
   include_vars: 'os-architecture/{{ ansible_system }}-{{ ansible_architecture }}.yml'
 
 - name: Determine architecture short name
-  set_fact:
+  ansible.builtin.set_fact:
     hashicorp_arch: '{{ ansible_userspace_architecture | replace("x86_64", "amd64") }}'
 
 - name: Include variable file containing current HashiCorp variables

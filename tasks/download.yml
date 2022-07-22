@@ -42,7 +42,7 @@
       register: hashicorp_software_sha256_sums
 
     - name: Filter SHA256SUMs to set {{ hashicorp_software_description }} SHA256SUM sum fact
-      set_fact:
+      ansible.builtin.set_fact:
         hashicorp_software_sha256sum: '{{ hashicorp_software_sha256.split() | first }}'
       loop_control:
         loop_var: hashicorp_software_sha256

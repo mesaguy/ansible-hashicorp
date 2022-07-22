@@ -1,6 +1,6 @@
 ---
 - name: Determine if specific version is set
-  set_fact:
+  ansible.builtin.set_fact:
     hashicorp_software_specific_version: "{% if hashicorp_software_specific_version is defined and \
       hashicorp_software_specific_version | bool and hashicorp_software_specific_version | length > 1 %}\
       {{ hashicorp_software_specific_version }}\
