@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.77] - 2022-08-26
+
+### Changed
+- Upgrade boundary from v0.10.1 to v0.10.2
+- Upgrade nomad from v1.3.3 to v1.3.4
+- Upgrade terraform from v1.2.7 to v1.2.8
+
 ## [0.3.76] - 2022-08-18
 
 ### Changed
