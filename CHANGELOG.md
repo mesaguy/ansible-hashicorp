@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.80] - 2022-09-21
+
+### Changed
+- Upgrade consul from v1.13.1 to v1.13.2
+- Upgrade terraform from v1.2.9 to v1.3.0
+
 ## [0.3.79] - 2022-09-16
 
 ### Changed
