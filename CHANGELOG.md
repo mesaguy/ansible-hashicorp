@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.97] - 2023-01-31
+
+### Changed
+- Upgrade consul from v1.14.3 to v1.14.4
+- Upgrade sentinel from v0.19.1 to v0.19.2
+
 ## [0.3.96] - 2023-01-16
 
 ### Changed
