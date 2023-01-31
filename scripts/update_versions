@@ -2,12 +2,12 @@
 
 function get_latest() {
     NAME=$1
-    lynx -dump -nolist https://releases.hashicorp.com/$NAME/ | grep ${NAME}_ | awk '{print $2}' | grep -vE '.*(\-alpha.*|\+ent.*|\-ent.*|\-connect.*|\-rc.*|\-beta.*)' | sed "s/${NAME}_//g" | sort --version-sort | tail -1
+    lynx -dump -nolist https://releases.hashicorp.com/$NAME/ | grep ${NAME}_ | awk '{print $2}' | grep -vE '(-alpha|\+ent|-ent|-connect|-rc|-beta)' | sed "s/${NAME}_//g" | sort --version-sort | tail -1
 }
 
 function get_latest_docker() {
     NAME=$1
-    curl -s "https://registry.hub.docker.com/v2/repositories/library/${NAME}/tags/" | jq -r '."results"[]["name"]' | grep -v '^latest$' | grep -vE '.*(\-alpha.*|\+ent.*|\-ent.*|\-connect.*|\-rc.*|\-beta.*)' | head -1
+    curl -s "https://registry.hub.docker.com/v2/repositories/library/${NAME}/tags/" | jq -r '."results"[]["name"]' | grep -v '^latest$' | grep -vE '(-alpha|\+ent|-ent|-connect|-rc|-beta)' | head -1
 }
 
 function check_if_update () {

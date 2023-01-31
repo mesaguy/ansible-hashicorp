@@ -26,3 +26,12 @@
        {{ lookup("file", "files/hashicorp-20210419.asc") }}
        EOF
   when: not 'C874011F0AB405110D02105534365D9472D7468F' in gpg_output.stdout
+
+- name: Import HashiCorp's 2023 GPG public key
+  become: true
+  shell:
+    cmd: |
+       cat << EOF | gpg --import
+       {{ lookup("file", "files/hashicorp-20230110.asc") }}
+       EOF
+  when: not '798AEC654E5C15428C8E42EEAA16FCBCA621E701' in gpg_output.stdout

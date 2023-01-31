@@ -17,6 +17,12 @@
         data: "{{ lookup('file', '{{ role_path }}/files/hashicorp-apt.asc') }}"
         state: present
 
+    - name: Add HashiCorp Apt repo 2023 GPG public key
+      become: true
+      ansible.builtin.apt_key:
+        data: "{{ lookup('file', '{{ role_path }}/files/hashicorp-20230110.asc') }}"
+        state: present
+
     - name: Setup HashiCorp Apt repository
       become: true
       ansible.builtin.copy:
