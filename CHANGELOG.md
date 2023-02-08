@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.98] - 2023-02-08
+
+### Changed
+- Upgrade sentinel from v0.19.2 to v0.19.3
+- Upgrade vault from v1.12.2 to v1.12.3
+
 ## [0.3.97] - 2023-01-31
 
 ### Changed
