@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.104] - 2023-03-30
+
+### Changed
+- Upgrade nomad from v1.5.1 to v1.5.2
+- Upgrade terraform from v1.4.2 to v1.4.4
+- Upgrade vault from v1.13.0 to v1.13.1
+
 ## [0.3.103] - 2023-03-20
 
 ### Changed
