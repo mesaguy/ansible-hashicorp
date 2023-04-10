@@ -1,9 +1,9 @@
 ---
-boundary: 0.12.1
+boundary: 0.12.2
 consul: 1.15.2
-consul_template: 0.30.0
+consul_template: 0.31.0
 envconsul: 0.13.1
-nomad: 1.5.2
+nomad: 1.5.3
 packer: 1.8.6
 sentinel: 0.21.0
 serf: 0.8.2
