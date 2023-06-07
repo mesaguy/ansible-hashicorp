@@ -1,11 +1,11 @@
 ---
 boundary: 0.12.2
-consul: 1.15.2
+consul: 1.15.3
 consul_template: 0.32.0
 envconsul: 0.13.2
 nomad: 1.5.6
-packer: 1.8.7
-sentinel: 0.21.1
+packer: 1.9.1
+sentinel: 0.22.0
 serf: 0.8.2
 terraform: 1.4.6
 vagrant: 2.3.6
