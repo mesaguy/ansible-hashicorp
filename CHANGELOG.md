@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.111] - 2023-06-22
+
+### Changed
+- Upgrade boundary from v0.12.2 to v0.13.0
+- Upgrade sentinel from v0.22.0 to v0.22.1
+- Upgrade terraform from v1.4.6 to v1.5.1
+- Upgrade vagrant from v2.3.6 to v2.3.7
+- Upgrade vault from v1.13.2 to v1.14.0
+- Upgrade waypoint from v0.11.1 to v0.11.2
+
 ## [0.3.110] - 2023-06-07
 
 ### Changed
